@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>Item Information Page</title>
+</head>
+<body class="bg-gray-100 p-6">
+
+  <div class="max-w-md mx-auto bg-white p-8 border rounded shadow-md mt-10">
+
+    <h2 class="text-2xl font-semibold mb-6">Item Information</h2>
+
+  <form action="/createitem" method="post">
+      <!-- Item Name Field -->
+      <div class="mb-4">
+        <label for="itemName" class="block text-gray-700 text-sm font-bold mb-2">Item Name</label>
+        <input id="itemName" type="text" name="itemName" class="form-input w-full border rounded py-2 px-3" placeholder="Enter item name">
+      </div>
+  
+      <!-- Item Price Field -->
+      <div class="mb-4">
+        <label for="itemPrice" class="block text-gray-700 text-sm font-bold mb-2">Item Price</label>
+        <input id="itemPrice" type="number" name="itemPrice" class="form-input w-full border rounded py-2 px-3" placeholder="Enter item price" step="0.01">
+      </div>
+  
+      <!-- Item Unit Field -->
+      <div class="mb-4">
+        <label for="itemUnit" class="block text-gray-700 text-sm font-bold mb-2">Item Unit</label>
+        <input id="itemUnit" type="text" name="itemUnit" class="form-input w-full border rounded py-2 px-3" placeholder="Enter item unit">
+      </div>
+  
+      <!-- Total Field (Disabled) -->
+      <div class="mb-6">
+        <label for="total" class="block text-gray-700 text-sm font-bold mb-2">Total</label>
+        <input id="total" type="text" name="total" class="form-input w-full border rounded py-2 px-3 bg-gray-200" placeholder="Total" disabled>
+      </div>
+  
+      <!-- Submit Button -->
+      <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+  </form>
+    
+
+  </div>
+
+</body>
+</html>

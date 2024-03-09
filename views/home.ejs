@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>Home Page</title>
+</head>
+<body class="bg-gray-100">
+  <header class="bg-blue-500 text-white py-4 flex items-center justify-between px-7 gap-3">
+    <div class="container">
+      <h1 class="text-3xl capitalize font-semibold"><%=shopOwner.username%></h1>
+    </div>
+    <a class="text-2xl font-semibold bg-gray-800 rounded-xl p-2" href="/update/<%=shopOwner._id%>">Profile</a>
+    <a class="text-2xl font-semibold bg-gray-800 rounded-xl p-2" href="/bill">Bills</a>
+  </header>
+  <div class="container mx-auto mt-6 w-full h-96">
+
+  </div>
+  <footer class="bg-gray-800 text-white p-6 mt-6 flex justify-between item-center">
+    <h4 class="text-2xl"><b>Contact:</b> <%=shopOwner.phone%></h4>
+    <h4 class="text-2xl"><b>GST NO.:</b> <%=shopOwner.gstno%></h4>
+    <h4 class="text-2xl"><b>Email:</b> <%=shopOwner.email%></h4>
+    <!-- <div class="container mx-auto text-center">
+      <p>&copy; 2024 Your Company. All rights reserved.</p>
+    </div> -->
+    <h5 class="text-2xl"><b>Add.: </b><%=shopOwner.address%></h5>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js" integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>

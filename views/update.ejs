@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>Update Page</title>
+</head>
+<body class="bg-gray-100 p-6">
+
+  <div class="max-w-md mx-auto bg-white p-8 border rounded shadow-md mt-10">
+    <h2 class="text-2xl font-semibold mb-6">Update Information</h2>
+    <!-- Address Field -->
+   <form action="/update/<%=shopId%>" method="post">
+    <div class="mb-4">
+        <label for="address" class="block text-gray-700 text-sm font-bold mb-2">Address</label>
+        <textarea id="address" name="address" class="form-input w-full border rounded py-2 px-3" rows="4" placeholder="Enter your address"><%=shopOwner.address%></textarea>
+      </div>
+      <!-- GST Number Field -->
+      <div class="mb-4">
+        <label for="gstNumber" class="block text-gray-700 text-sm font-bold mb-2">GST Number</label>
+        <input id="gstNumber" type="text" name="gstno" class="form-input w-full border rounded py-2 px-3" placeholder="Enter GST Number" value="<%=shopOwner.gstno%>">
+      </div>
+      <!-- Phone Field -->
+      <div class="mb-4">
+        <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Phone</label>
+        <input id="phone" type="tel" name="phone" class="form-input w-full border rounded py-2 px-3" placeholder="Enter your phone number" value="<%=shopOwner.phone%>">
+      </div>
+        <!-- Update Button -->
+      <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+   </form>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>login</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://cdn.tailwindcss.com"></script>
+   
+  </head>
+  <body>
+    <div class="main w-full h-full bg-zinc-700 flex items-center justify-center"> 
+      <form action="/login" method="post">
+        <div class="card w-96 h-[500px] bg-cyan-800 rounded-lg flex flex-col items-center justify-center gap-y-3">
+          <h1 class="font-sans text-2xl bol font-bold text-white mx-2">Please login yourself!</h1>
+          <div class="w-full h-16  flex items-center justify-center">
+            <label for="username" class="font-bold text-xl mx-3">Shop Name</label>
+            <input class="username p-1 rounded-md" type="text" placeholder="Enter Username" name="username">
+          </div>
+          <div class="w-full h-16 flex items-center justify-center">
+            <label for="password" class="font-bold text-xl mx-3">Password</label>
+            <input class="username p-1 rounded-md" type="password" placeholder="Enter Password" name="password">
+          </div>
+          <div class="btn bg-green-700 p-2 font-bold text-[18px] rounded-xl">
+            <input type="submit"> 
+          </div>
+          <span class="text-white font-medium">Register first then login yourself <a class="underline" href="/">click</a></span>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

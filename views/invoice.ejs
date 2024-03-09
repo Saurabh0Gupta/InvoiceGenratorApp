@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+      *{
+      margin: 0%;
+      padding: 0%;
+      box-sizing: border-box;
+      }
+      html,body
+      {
+      width: 100%;
+      height: 100%;
+      
+      }
+      .main{
+        width: 100%;
+        min-height: 60vh;
+      }
+        .invoice {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .company{
+            margin: 0 auto;
+            border-bottom: 2px solid #000;
+        }
+        .customer{
+            margin: 0 auto;
+            border-bottom: 2px solid #000;
+        }
+        .bottom{
+            margin: 0 auto;
+        }
+        .inWord{
+            margin: 0 auto;  
+        }
+        .head{
+            margin: 0 auto; 
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            min-height: 20vh;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        /* .total {
+            margin-top: 20px;
+            float: right;
+        } */
+        .overlay{
+            background-color: #ffffff37;
+            backdrop-filter: blur(10px);
+        }
+        .cancel{
+            position: absolute;
+            top: 0px;
+            right: 3px;
+            background-color: #00000011;
+            cursor: pointer;
+            padding: 2px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay hidden w-full h-full absolute">
+        <div class="max-w-md mx-auto bg-white p-8 border rounded shadow-md mt-10 relative">
+            
+            <h2 class="text-2xl font-semibold mb-6">Item Information</h2>
+            <i class="cancel ri-close-line"></i>
+          <form action="/createitem/<%=bill._id%>" method="post">
+              <!-- Item Name Field -->
+              <div class="mb-4">
+                <label for="itemName" class="block text-gray-700 text-sm font-bold mb-2">Item Name</label>
+                <input id="itemName" type="text" name="itemName" class="form-input w-full border rounded py-2 px-3" placeholder="Enter item name">
+              </div>
+              <!-- Item Price Field -->
+              <div class="mb-4">
+                <label for="itemPrice" class="block text-gray-700 text-sm font-bold mb-2">Item Price</label>
+                <input id="itemPrice" type="number" name="itemPrice" class="form-input w-full border rounded py-2 px-3" placeholder="Enter item price" step="0.01">
+              </div>
+              <!-- Item Unit Field -->
+              <div class="mb-4">
+                <label for="itemUnit" class="block text-gray-700 text-sm font-bold mb-2">Item Unit</label>
+                <input id="itemUnit" type="text" name="itemUnit" class="form-input w-full border rounded py-2 px-3" placeholder="Enter item unit">
+              </div>
+              <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          </form>
+          </div>
+    </div>
+    <div class="main">
+        <header class="bg-blue-500 text-white py-4 flex items-center justify-between px-7 gap-3">
+            <div class="container">
+              <h1 class="name text-3xl capitalize font-semibold"><%=shopOwner.username%></h1>
+            </div>
+            <h5 class="text-2xl"><%=shopOwner.address%></h5>
+            <a class="text-2xl font-semibold bg-gray-800 rounded-xl p-2" href="/home">Home</a>
+            <button onclick="additem('<%=bill._id%>')" class="itembtn text-xl py-1 px-3 bg-gray-800 rounded-xl">Add Items</button>
+            <button data-name="<%=bill.customerName%>" class="itembtn text-xl py-1 px-3 bg-gray-800 rounded-xl" id="download">Download</button>
+          </header>
+      <div class="bill" id="bill">
+        <h1 class="head max-w-[800px]  flex item-center justify-center text-3xl font-bold uppercase my-2 ">InVoice</h1>
+        <div class="company max-w-[800px] min-h-24   flex item-center justify-between py-3 v boder-black">
+            <div class="left-div">
+                <h3 class="text-2xl font-bold"><%=shopOwner.username%></h3>
+                <h6><b>Add. </b><%=shopOwner.address%></h6>
+                <h4><b>GST No.</b> <%=shopOwner.gstno%></h4>
+            </div>
+            <div class="right-div">
+                <h6><b>Phone </b><%=shopOwner.phone%></h6>
+                <h6><b>Email </b><%=shopOwner.email%></h6>
+            </div>
+        </div>
+        <div class="customer max-w-[800px] min-h-24   flex item-center justify-between py-3 v boder-black">
+            <div class="left-div">
+                <h3 class="text-2xl font-bold"><%=bill.customerName%></h3>
+                <h6><b>Add. </b><%=bill.customerAddress%></h6>
+                <h4><b>GST No.</b> <%=bill.customerPhone%></h4>
+            </div>
+            <div class="right-div">
+                <h6><b>Phone </b><%=bill.customerPhone%></h6>
+                <h6><b>Email </b><%=bill.customerEmail%></h6>
+            </div>
+        </div>
+        <div class="invoice">
+            <p>Date: <%=bill.billDate%></p>
+            <p>Time:</p>
+            <p>Invoice Number:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>S No.</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%var sum = 0%>
+                    <%var sno=1%>
+                    <%bill.items.forEach((item)=>{%>
+                        <tr ondblclick="deleterow('<%=item._id%>','<%=bill._id%>')">
+                            <td><%=sno++%></td>
+                            <td class="capitalize"><%=item.itemName%></td>
+                            <td><%=item.itemUnit%></td>
+                            <td><%=item.itemPrice%></td>
+                            <td><%=(item.itemUnit*item.itemPrice)%></td>
+                        </tr>
+                        <%sum+=item.total%>
+                    <%})%>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+    
+            <div class="total  bg-gray-200">
+                <p on class="sum w-[150px] ml-auto"><strong>Total: <%=sum%></strong></p>
+            </div>
+        </div>
+        <%if(sum!==0){%>
+        <div id="<%=sum%>" class="inWord max-w-[800px] min-h-12 flex item-center justify-start py-3">
+            
+        </div>
+        <%}%>
+        <div class="bottom max-w-[800px] h-[20vh] flex item-center justify-between py-4">
+            <div class="companyemploy  text-center " >
+                <h4>CEO Sign/Manager Sign</h4>
+                <p>Seal of Company with date</p>
+            </div>
+            <div class="receiver text-center">
+                <h4>Receiver Sign</h4>
+                <p>Receiver Name</p>
+            </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js" integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function additem(){
+            document.querySelector('.overlay').style.display='block'
+        }
+        document.querySelector('.cancel').addEventListener("dblclick",()=>{
+            document.querySelector('.overlay').style.display='none'
+        })
+        async function deleterow(id,billId){
+        var deleteres=confirm("Are you Sure ??")
+        if(deleteres){
+            const response= await axios.post(`/delete/${id}`,{
+            billId:billId
+           })
+           console.log(response.data._id)
+           location.reload();
+           return response.data._id;
+        }else{
+            return;
+        }
+        }
+        window.onload=function(){
+            const btn=document.querySelector("#download")
+            btn.addEventListener("click",(e)=>{
+                const invoice=document.querySelector("#bill")
+                const customer=e.target.dataset.name
+                var opt = {
+                    margin:       0.1,
+                    filename:     `${customer}.pdf`,
+                    image:        { type: 'jpeg', quality: 0.98 },
+                    html2canvas:  { scale: 2 },
+                    jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+                html2pdf().from(invoice).set(opt).save();
+            })
+        }
+        document.querySelector(".name").addEventListener("click",(event)=>{
+            console.log(event)
+        })
+        function convertAmountToWords(amount) {
+            const ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+            const teens = ['', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+            const tens = ['', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+
+            function convertLessThanThousand(number) {
+            let words = '';
+
+            if (number >= 100) {
+            words += ones[Math.floor(number / 100)] + ' hundred ';
+            number %= 100;
+            }
+
+            if (number >= 11 && number <= 19) {
+            words += teens[number - 11] + ' ';
+            } else if (number >= 20 || number === 10) {
+                words += tens[Math.floor(number / 10)] + ' ';
+                number %= 10;
+            }
+
+            if (number > 0) {
+            words += ones[number] + ' ';
+        }
+
+            return words.trim();
+        }
+
+        if (amount === 0) {
+            return 'zero';
+        }
+
+        let words = '';
+
+        if (amount < 0) {
+            words += 'negative ';
+            amount = Math.abs(amount);
+        }
+
+        if (amount >= 1000000000) {
+            words += convertLessThanThousand(Math.floor(amount / 1000000000)) + ' billion ';
+            amount %= 1000000000;
+        }
+
+        if (amount >= 1000000) {
+            words += convertLessThanThousand(Math.floor(amount / 1000000)) + ' million ';
+            amount %= 1000000;
+        }
+
+        if (amount >= 1000) {
+            words += convertLessThanThousand(Math.floor(amount / 1000)) + ' thousand ';
+            amount %= 1000;
+        }
+        words += convertLessThanThousand(amount);
+        return words.trim();
+    }
+
+var amount=document.querySelector('.inWord').id
+const words = convertAmountToWords(amount);
+appendword(words);
+console.log(words);
+function appendword(ruppess){
+    const tmpl=`<h1 class="capitalize" ><b>IN Words: ${ruppess} Only</b></h1>`
+    document.querySelector('.inWord').innerHTML+=tmpl
+}
+    </script>
+</body>
+</html>

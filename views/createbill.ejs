@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>Customer Information Page</title>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-blue-500 text-white py-4 flex items-center justify-between px-7 gap-3">
+        <div class="container mx-auto">
+          <h1 class="text-2xl font-semibold">shop.username</h1>
+        </div>
+        <a class="text-2xl font-semibold bg-gray-800 rounded-xl p-2" href="/home">Home</a>
+        <a class="text-2xl font-semibold bg-gray-800 rounded-xl p-2" href="/bill">Bills</a>
+      </header>
+  <div class="max-w-md mx-auto bg-white p-8 border rounded shadow-md mt-10">
+
+    <h2 class="text-2xl font-semibold mb-6">Customer Information</h2>
+
+    <!-- Customer Name Field -->
+   <form action="/createbill" method="post">
+    <div class="mb-4">
+        <label for="customerName" class="block text-gray-700 text-sm font-bold mb-2">Customer Name</label>
+        <input id="customerName" type="text" name="customerName" class="form-input w-full border rounded py-2 px-3" placeholder="Enter customer name">
+      </div>
+  
+      <!-- Customer Phone Field -->
+      <div class="mb-4">
+        <label for="customerPhone" class="block text-gray-700 text-sm font-bold mb-2">Customer Phone</label>
+        <input id="customerPhone" type="tel" name="customerPhone" class="form-input w-full border rounded py-2 px-3" placeholder="Enter customer phone number">
+      </div>
+  
+      <!-- Customer Address Field -->
+      <div class="mb-6">
+        <label for="customerAddress" class="block text-gray-700 text-sm font-bold mb-2">Customer Address</label>
+        <textarea id="customerAddress" name="customerAddress" class="form-input w-full border rounded py-2 px-3" rows="4" placeholder="Enter customer address"></textarea>
+      </div>
+      <div class="mb-4">
+        <label for="customerName" class="block text-gray-700 text-sm font-bold mb-2">Customer GSTNO.</label>
+        <input id="customerName" type="text" name="customerGstno" class="form-input w-full border rounded py-2 px-3" placeholder="Enter customer GST NO.">
+      </div>
+      <div class="mb-4">
+        <label for="customerName" class="block text-gray-700 text-sm font-bold mb-2">Customer Email</label>
+        <input id="customerName" type="text" name="customerEmail" class="form-input w-full border rounded py-2 px-3" placeholder="Enter customer Email">
+      </div>
+      <!-- Submit Button -->
+      <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+   </form>
+
+  </div>
+
+</body>
+</html>
